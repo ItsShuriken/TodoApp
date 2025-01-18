@@ -23,4 +23,14 @@ const updateTodo = async (updatedTodo) => {
   }
 }
 
-export { addTodo, fetchTodos, updateTodo };
+async function deleteTodo(todo) {
+  try {
+    const response = await instance.delete(`/api/todos/${todo.id}`, todo);
+    return response;
+  } catch (error) {
+    // Handle any errors that occur during the deletion
+    console.error(error);
+  }
+}
+
+export { addTodo, fetchTodos, updateTodo, deleteTodo };

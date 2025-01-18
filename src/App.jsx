@@ -4,7 +4,7 @@ import Todo from './Body/Todo';
 import Header from './Header/Header';
 import TodoFilters from './Body/TodoFilters';
 import { filterTodos } from './Body/filterLogic';
-import { addTodo, fetchTodos, updateTodo } from './DataService/Api';
+import { addTodo, fetchTodos, updateTodo, deleteTodo } from './DataService/Api';
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -28,6 +28,19 @@ const App = () => {
     const todo = await addTodo(newTodo);
     setTodos([...todos, todo]);
   };
+
+  const handleDeleteTodo = async (todo) => {
+    try {
+      const response = await deleteTodo(todo);
+      if (response.status === 200) {
+        setTodos(todos.filter((t) => t.id !== todo.id));
+      } else {
+        console.error('Error deleting todo:', response.data);
+      }
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  }
 
   const handleCheckboxChange = async (todo) => {
     // Toggle completed state
@@ -65,6 +78,7 @@ const handleSortToggle = () => {
             <Todo
               todo={todo}
               handleCheckboxChange={handleCheckboxChange}
+              handleDeleteTodo={handleDeleteTodo}
             />
           </li>
         ))}

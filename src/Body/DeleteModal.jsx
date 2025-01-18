@@ -1,9 +1,11 @@
 import React from 'react';
 import Modal from '../Modal';
+import { deleteTodo } from '../DataService/Api';
 
 function DeleteModal({ isOpen, handleCloseModal, todo, handleDeleteTodo }) {
+
   const handleConfirmDelete = () => {
-    handleDeleteTodo(todo.id);
+    handleDeleteTodo(todo);
     handleCloseModal();
   };
 
