@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import AddTodo from './Body/AddTodo';
-import Todo from './Body/Todo';
-import Header from './Header/Header';
-import TodoFilters from './Body/TodoFilters';
-import { filterTodos } from './Body/filterLogic';
+import AddTodo from './Content/Body/AddTodo';
+import Todo from './Content/Body/Todo';
+import Header from './Content/Header/Header';
+import TodoFilters from './Content/Body/TodoFilters';
+import { filterTodos } from './util/filterLogic';
 import { addTodo, fetchTodos, updateTodo, deleteTodo } from './DataService/Api';
 
 const App = () => {

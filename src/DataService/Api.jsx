@@ -12,7 +12,7 @@ const fetchTodos = async () => {
   return response.data;
 };
 
-const updateTodo = async (updatedTodo) => {
+async function updateTodo (updatedTodo){
   try {
     console.log(updatedTodo);
     const response = await instance.put(`/api/todos/${updatedTodo.id}`, updatedTodo);

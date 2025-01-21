@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Modal from '../Modal';
+import Modal from '../../Templates/Modal';
 import ContentEditable from 'react-contenteditable';
-import { updateTodo } from '../DataService/Api';
+import { updateTodo } from '../../DataService/Api';
 
 function DetailModal({ isOpen, handleCloseModal, todo}) {
     const [title, setTitle] = useState(todo.title);
@@ -15,15 +15,22 @@ function DetailModal({ isOpen, handleCloseModal, todo}) {
         setDescription(event.target.value);
     };
 
-    const handleBlur = async () => {
-        const updatedTodo = { ...todo, title, description };
-        const response = await updateTodo(updatedTodo);
-        if (response.status === 200) {
-            console.log(response.data);
-        } else {
-            console.error('Error updating todo:', response.data, response.status);
+    const handleBlur = async (event, field) => {
+        const text = event.target.textContent;
+        console.log("description text", event);
+        const updatedTodo = { ...todo, [field]: text };
+        try {
+
+            const response = await updateTodo(updatedTodo);
+            if (response && response.status === 200) {
+                console.log('Todo updated successfully');
+            } else {
+                console.log('Todo update failed', response);
+            }
+        } catch (error) {
+            console.error('Error updating todo:', error);
         }
-    };
+      };
 
   return (
     <Modal isOpen={isOpen} handleCloseModal={handleCloseModal}>
@@ -31,23 +38,17 @@ function DetailModal({ isOpen, handleCloseModal, todo}) {
             <ContentEditable
                 html={title}
                 onChange={handleTitleChange}
-                onBlur={handleBlur}
+                onBlur={(event) => handleBlur(event, 'title')}
             />
         </span>
         <span>
             <ContentEditable
                 html={description}
                 onChange={handleDescriptionChange}
-                onBlur={handleBlur}
+                onBlur={(event) => handleBlur(event, 'description')}
             />
         </span>
         <div className="relative mt-4">
-        <button
-            type="button"
-            className="bg-white rounded border border-gray-300 px-4 py-2 hover:bg-gray-100"
-            >
-            <img src="images/compose.png" alt="edit icon" className="w-6 h-6" />
-        </button>
       </div>
     </Modal>
   );

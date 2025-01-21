@@ -1,6 +1,6 @@
 import React from 'react';
-import Modal from '../Modal';
-import { deleteTodo } from '../DataService/Api';
+import Modal from '../../Templates/Modal';
+import { deleteTodo } from '../../DataService/Api';
 
 function DeleteModal({ isOpen, handleCloseModal, todo, handleDeleteTodo }) {
 
