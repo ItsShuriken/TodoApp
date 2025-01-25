@@ -1,11 +1,12 @@
 import React from 'react';
 import Modal from '../../Templates/Modal';
-import { deleteTodo } from '../../DataService/Api';
+import { TodoContext } from '../../DataService/TodoContext';
 
-function DeleteModal({ isOpen, handleCloseModal, todo, handleDeleteTodo }) {
+function DeleteModal({ isOpen, handleCloseModal, todo }) {
+  const { deleteTodo } = React.useContext(TodoContext);
 
-  const handleConfirmDelete = () => {
-    handleDeleteTodo(todo);
+  const handleConfirmDelete = async() => {
+    await deleteTodo(todo);
     handleCloseModal();
   };
 

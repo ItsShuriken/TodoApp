@@ -1,26 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import Modal from '../../Templates/Modal';
 import ContentEditable from 'react-contenteditable';
-import { updateTodo } from '../../DataService/Api';
+import { TodoContext } from '../../DataService/TodoContext';
 
 function DetailModal({ isOpen, handleCloseModal, todo}) {
-    const [title, setTitle] = useState(todo.title);
-    const [description, setDescription] = useState(todo.description);
-
-    const handleTitleChange = (event) => {
-        setTitle(event.target.value);
-    };
-
-    const handleDescriptionChange = (event) => {    
-        setDescription(event.target.value);
-    };
+    const { updateTodo } = useContext(TodoContext);
 
     const handleBlur = async (event, field) => {
         const text = event.target.textContent;
-        console.log("description text", event);
         const updatedTodo = { ...todo, [field]: text };
         try {
-
             const response = await updateTodo(updatedTodo);
             if (response && response.status === 200) {
                 console.log('Todo updated successfully');
@@ -30,21 +19,19 @@ function DetailModal({ isOpen, handleCloseModal, todo}) {
         } catch (error) {
             console.error('Error updating todo:', error);
         }
-      };
+    };
 
   return (
     <Modal isOpen={isOpen} handleCloseModal={handleCloseModal}>
         <span className="text-lg font-semibold mb-2">
             <ContentEditable
-                html={title}
-                onChange={handleTitleChange}
+                html={todo.title}
                 onBlur={(event) => handleBlur(event, 'title')}
             />
         </span>
         <span>
             <ContentEditable
-                html={description}
-                onChange={handleDescriptionChange}
+                html={todo.description}
                 onBlur={(event) => handleBlur(event, 'description')}
             />
         </span>
