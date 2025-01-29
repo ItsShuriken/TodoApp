@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
 import DeleteModal from './DeleteModal';
 import DetailModal from './DetailModal';
-import { TodoProvider, TodoContext } from '../../DataService/TodoContext';
+import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper';
 
 function Todo({ todo }) {
-  const { todos, updateTodo } = useContext(TodoContext);
+  const { todos, handleUpdateTodo } = useContext(TodoListContextWrapper);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleCheckboxChange = async (todo) => {
     const updatedTodo = { ...todo, is_completed: !todo.is_completed };
     try {
-      await updateTodo(updatedTodo);
+      await handleUpdateTodo(updatedTodo);
     } catch (error) {
       console.error('Error updating todo:', error);
     }

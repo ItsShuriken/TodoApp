@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
+import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper';
 
-const AddTodo = ({ addTodo }) => {
+const AddTodo = () => {
+	const { handleAddTodo } = useContext(TodoListContextWrapper);
+
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
 
@@ -17,7 +21,7 @@ const AddTodo = ({ addTodo }) => {
 			alert('Todo title cannot be empty!');
 			return;
 		}
-		addTodo({ title: title, is_completed: false , description: description });
+		handleAddTodo({ title: title, is_completed: false , description: description });
 		setTitle('');
 		setDescription('');
 	}

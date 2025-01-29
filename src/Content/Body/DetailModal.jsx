@@ -1,24 +1,15 @@
 import React, { useContext } from 'react';
 import Modal from '../../Templates/Modal';
 import ContentEditable from 'react-contenteditable';
-import { TodoContext } from '../../DataService/TodoContext';
+import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper';
 
 function DetailModal({ isOpen, handleCloseModal, todo}) {
-    const { updateTodo } = useContext(TodoContext);
+    const { handleUpdateTodo } = useContext(TodoListContextWrapper);
 
     const handleBlur = async (event, field) => {
         const text = event.target.textContent;
         const updatedTodo = { ...todo, [field]: text };
-        try {
-            const response = await updateTodo(updatedTodo);
-            if (response && response.status === 200) {
-                console.log('Todo updated successfully');
-            } else {
-                console.log('Todo update failed', response);
-            }
-        } catch (error) {
-            console.error('Error updating todo:', error);
-        }
+        await handleUpdateTodo(updatedTodo);
     };
 
   return (

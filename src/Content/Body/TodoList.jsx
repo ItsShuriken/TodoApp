@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react'
 import Todo from './Todo'
-import { TodoContext } from '../../DataService/TodoContext'
+import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper'
 
 function TodoList() {
-    const { todos } = useContext(TodoContext);
+    const { todos } = useContext(TodoListContextWrapper);
 
     useEffect(() => {
       // This will be called whenever the todos state changes
