@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import Modal from '../../Templates/Modal';
 import ContentEditable from 'react-contenteditable';
-import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper';
+import { TodoListContext } from '../../DataService/TodoListContext.jsx';
 
 function DetailModal({ isOpen, handleCloseModal, todo}) {
-    const { handleUpdateTodo } = useContext(TodoListContextWrapper);
+    const { handleUpdateTodo } = useContext(TodoListContext);
 
     const handleBlur = async (event, field) => {
         const text = event.target.textContent;

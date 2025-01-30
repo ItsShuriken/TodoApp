@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import DeleteModal from './DeleteModal';
 import DetailModal from './DetailModal';
-import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper';
+import { TodoListContext } from '../../DataService/TodoListContext.jsx';
 
 function Todo({ todo }) {
-  const { todos, handleUpdateTodo } = useContext(TodoListContextWrapper);
+  const { handleUpdateTodo } = useContext(TodoListContext);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -44,25 +44,23 @@ function Todo({ todo }) {
         </div>
       </div>
       <div className="flex justify-end ml-auto flex-1">
-        <TodoProvider>
-          <button
-            type="button"
-            className="bg-white rounded border border-gray-300 px-4 py-2 mr-2 hover:bg-gray-100"
-            onClick={toggleOpenDetailModal}
-          >
-            Details
-          </button>
-          {isDetailModalOpen && <DetailModal isOpen={isDetailModalOpen} handleCloseModal={toggleOpenDetailModal} todo={todo}/>}
+        <button
+          type="button"
+          className="bg-white rounded border border-gray-300 px-4 py-2 mr-2 hover:bg-gray-100"
+          onClick={toggleOpenDetailModal}
+        >
+          Details
+        </button>
+        {isDetailModalOpen && <DetailModal isOpen={isDetailModalOpen} handleCloseModal={toggleOpenDetailModal} todo={todo}/>}
 
-          <button
-            type="button"
-            className="bg-red-500 rounded border border-red-500 px-4 py-2 text-white hover:bg-red-700"
-            onClick={() => toggleOpenDeleteModal()}
-          >
-            <img src="images\bin.png" alt="delete icon" className="w-6 h-6"/>
-          </button>
-          {isDeleteModalOpen && <DeleteModal isOpen={isDeleteModalOpen} handleCloseModal={toggleOpenDeleteModal} todo={todo} />}
-        </TodoProvider>
+        <button
+          type="button"
+          className="bg-red-500 rounded border border-red-500 px-4 py-2 text-white hover:bg-red-700"
+          onClick={() => toggleOpenDeleteModal()}
+        >
+          <img src="images\bin.png" alt="delete icon" className="w-6 h-6"/>
+        </button>
+        {isDeleteModalOpen && <DeleteModal isOpen={isDeleteModalOpen} handleCloseModal={toggleOpenDeleteModal} todo={todo} />}
       </div>
     </div>
   );

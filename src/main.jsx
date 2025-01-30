@@ -1,13 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { TodoListContextWrapper } from './DataService/TodoListContextWrapper'
+import { TodoListProvider } from './DataService/TodoListContext.jsx'
 import './index.css'
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <TodoListContextWrapper>
+    <TodoListProvider>
       <App />
-    </TodoListContextWrapper>
+    </TodoListProvider>
   </StrictMode>,
 )

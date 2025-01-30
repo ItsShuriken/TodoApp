@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import Modal from '../../Templates/Modal';
-import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper';
+import { TodoListContext } from '../../DataService/TodoListContext.jsx';
 
 function DeleteModal({ isOpen, handleCloseModal, todo }) {
-  const { handleDeleteTodo } = useContext(TodoListContextWrapper);
+  const { handleDeleteTodo } = useContext(TodoListContext);
 
   const handleConfirmDelete = async() => {
     await handleDeleteTodo(todo);

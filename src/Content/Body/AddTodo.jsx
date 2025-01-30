@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useContext } from 'react';
-import { TodoListContextWrapper } from '../../DataService/TodoListContextWrapper';
+import { TodoListContext } from '../../DataService/TodoListContext.jsx';
 
 const AddTodo = () => {
-	const { handleAddTodo } = useContext(TodoListContextWrapper);
+	const { handleAddTodo } = useContext(TodoListContext);
 
 	const [title, setTitle] = useState('');
 	const [description, setDescription] = useState('');
