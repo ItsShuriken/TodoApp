@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useContext } from 'react';
+import Modal from '../../Templates/Modal';
 import { TodoListContext } from '../../DataService/TodoListContext.jsx';
 
-const AddTodo = () => {
+const AddTodo = ({ isOpen, handleCloseModal}) => {
 	const { handleAddTodo } = useContext(TodoListContext);
 
 	const [title, setTitle] = useState('');
@@ -27,6 +28,7 @@ const AddTodo = () => {
 	}
 
 	return (
+	<Modal isOpen={isOpen} handleCloseModal={handleCloseModal}>
 	<form onSubmit={handleSubmit} className='flex flex-col gap-2 p-4'>
 		<input 
 			type="text" 
@@ -45,6 +47,7 @@ const AddTodo = () => {
 			Add Todo
 		</button>
 	</form>
+	</Modal>
 	)
 }
 
